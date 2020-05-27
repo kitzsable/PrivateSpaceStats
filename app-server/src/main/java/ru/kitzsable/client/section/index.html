@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Stats</title>
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar-default">
+
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">SpaceX</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Rocket</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Interstellar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">OneSpace</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</nav>
+
+<div class="section">
+    <div class="section line">
+        <p>Ближайший запуск</p>
+        <p>Расписание</p>
+    </div>
+    <div class="section block">
+        <div class="section block container">
+            <div class="section block container hold">
+                <h1 id="companyname">Имя компании</h1>
+            </div>
+
+        </div>
+
+        <div class="section block cont">
+            <div class="section block cont back">
+                <h2 class="number-value" id="days">N</h2>
+                <h3 class="time-value">days</h3>
+            </div>
+            <div class="section block cont back">
+                <h2 class="number-value" id="hours">N</h2>
+                <h3 class="time-value">hours</h3>
+            </div>
+            <div class="section block cont back">
+                <h2 class="number-value" id="minutes">N</h2>
+                <h3 class="time-value">minutes</h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="section">
+    <div class="section line">
+        <p onmousedown="getCompanyLoad()">Запуски компаний</p>
+        <p onmousedown="getRacketLoad()">Запуски ракето-носителей</p>
+    </div>
+    <div id="chart-launches"></div>
+</div>
+
+<div class="section">
+    <div class="section line">
+        <p onmousedown="getCommonGoodLoad()">Общая полезная нагрузка</p>
+        <p onmousedown="">Нагрузка по РН</p>
+    </div>
+    <div id="chart-satel"></div>
+</div>
+
+<div class="section">
+    <div class="section line">
+        <p onmousedown="getPeople()">Всего</p>
+        <p onmousedown="getPeople()">По годам</p>
+    </div>
+    <div id="chart-people"></div>
+</div>
+
+<div class="section">
+    <div class="section line">
+        <p onmousedown="getCommonSattelites()">Общее число запущенных спутников</p>
+        <p onmousedown="getSattellites()">Спутники по РН</p>
+    </div>
+    <div id="chart-cosmodrome"></div>
+</div>
+
+<div class="section">
+    <div class="section line">
+        <p onmousedown="getLoad()">Запуски ракет с комплексов</p>
+    </div>
+    <div id="chart-load"></div>
+</div>
+
+<div class="map-div">
+    <img src="../media/WorldMap.png" />
+    <span tooltip="" flow="down" class="metka m1">!</span>
+    <span tooltip="" flow="down" class="metka m2">!</span>
+    <span ></span>
+</div>
+
+<div class="info-block">
+    <p>Вся информация представлена для ознакомления</p>
+    <h5>Contact</h5>
+    <p>404@sfu-kras.ru</p>
+</div>
+
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

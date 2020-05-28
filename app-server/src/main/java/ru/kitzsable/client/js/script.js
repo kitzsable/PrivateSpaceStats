@@ -5,13 +5,13 @@ window.onload = function () {
 function chart1(data) {
     let dat = [];
     let titles =[];
-    for (let i=0; i<titles.length;i++){
-        if (!titles.includes(data[i].title))titles.push(data[i].title);
-        dat.push([{name: data[i].title, data: data[i].value}]);
+    for (let i=0; i<data.length;i++){
+        titles.push(data[i].name);
+        dat.push(data[i].allLaunch);
     }
 
     let options = {
-        series: dat,
+        series: [{name: "data", data: dat}],
         chart: {
             type: 'bar',
             height: 350,
@@ -73,12 +73,26 @@ function chart1(data) {
 }
 function chart2() {
     let dat = [];
-    let years = [];
+    let years =[];
+
     for (let i=0; i<data.length;i++){
-        if (!years.includes(data[i].year))years.push(data[i].year);
-        dat.push([{name: data[i].title, data: data[i].value}]);
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
     }
+
     years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
 
   let options = {
     series: dat,
@@ -140,14 +154,31 @@ function chart2() {
  let chart = new ApexCharts(document.getElementById("chart-cosmodrome"), options);
  chart.render();
 }
-function chart3() {
-    let dat = [];
+function chart3(data) {
     let years = [];
+    let dat = [];
+
     for (let i=0; i<data.length;i++){
-        if (!years.includes(data[i].year))years.push(data[i].year);
-        dat.push([{name: data[i].title, data: data[i].value}]);
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
     }
+
     years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
+
+
+
  let options = {
     series: dat,
     chart: {
@@ -212,10 +243,23 @@ function chart4() {
     let dat = [];
     let years = [];
     for (let i=0; i<data.length;i++){
-        if (!years.includes(data[i].year))years.push(data[i].year);
-        dat.push([{name: data[i].title, data: data[i].value}]);
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
     }
+
     years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
 
  let options = {
     series: dat,
@@ -281,11 +325,25 @@ function chart4() {
 function chart5(data) {
     let years = [];
     let dat = [];
+
     for (let i=0; i<data.length;i++){
-        if (!years.includes(data[i].year))years.push(data[i].year);
-        dat.push([{name: data[i].title, data: data[i].value}]);
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
     }
+
     years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
 
 
  let options = {
@@ -349,6 +407,62 @@ function chart5(data) {
  chart.render();
 }
 
+function linechart(data, element) {
+    let dat = [];
+    let years = [];
+    for (let i=0; i<data.length;i++){
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
+    }
+
+    years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
+
+    let options = {
+        series: dat,
+        chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Product Trends by Month',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'],
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: years,
+        }
+    };
+    let chart = new ApexCharts(element, options);
+    chart.render();
+}
+
+
 function map(data) {
     let elem1 = document.getElementsByClassName("m1");
     let elem2 = document.getElementsByClassName("m2");
@@ -357,22 +471,34 @@ function map(data) {
     for (let i=0; i<data.length;i++){
         if (data[i].company == "SpaceX"){
             for (let j=0; j<elem1.length;j++){
-                if (elem1[j].tooltip=="") elem1[j].tooltip=data[i].description;
+                if (elem1[j].tooltip=="") {
+                    elem1[j].tooltip=data[i].name;
+                    break;
+                }
             }
         }
         else if (data[i].company == "RocketLab"){
             for (let j=0; j<elem2.length;j++){
-                if (elem2[j].tooltip=="") elem2[j].tooltip=data[i].description;
+                if (elem2[j].tooltip=="") {
+                    elem1[j].tooltip=data[i].name;
+                    break;
+                }
             }
         }
         else if (data[i].company == "One Space"){
             for (let j=0; j<elem3.length;j++){
-                if (elem3[j].tooltip=="") elem3[j].tooltip=data[i].description;
+                if (elem3[j].tooltip=="") {
+                    elem1[j].tooltip=data[i].name;
+                    break;
+                }
             }
         }
         else if (data[i].company == "Interstellar"){
             for (let j=0; j<elem4.length;j++){
-                if (elem4[j].tooltip=="") elem4[j].tooltip=data[i].description;
+                if (elem4[j].tooltip=="") {
+                    elem1[j].tooltip=data[i].name;
+                    break;
+                }
             }
         }
     }
@@ -435,10 +561,10 @@ function DateCalc(data) {
     timer = setInterval(updateClock, 1000);
 }
 
-function getCommonGoodLoad(){
+function getPHLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/rockets/payload/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -450,10 +576,25 @@ function getCommonGoodLoad(){
         },
     });
 }
+function getCommonGoodLoad(){
+    $.ajax({
+        type: 'GET',
+        url : "http://localhost:8080/companies/payload/",
+        dataType: 'json',
+        success : function(data) {
+            alert("data has been received");
+            console.log("SUCCESS: ");
+            linechart(data, document.getElementById('chart-satel'));
+        },
+        error : function(e) {
+            console.log("ERROR: ", e);
+        },
+    });
+}
 function getLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/spaceports/all/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -465,10 +606,25 @@ function getLoad(){
         },
     });
 }
-function getPeople(){
+function getPeopleByRockets(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/privateSpaceStats/stats/rockets/people/",
+        dataType: 'json',
+        success : function(data) {
+            alert("data has been received");
+            console.log("SUCCESS: ");
+            chart3(data);
+        },
+        error : function(e) {
+            console.log("ERROR: ", e);
+        },
+    });
+}
+function getPeopleByCompany(){
+    $.ajax({
+        type: 'GET',
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/payload",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -483,12 +639,12 @@ function getPeople(){
 function getCommonSattelites(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/companies/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
             console.log("SUCCESS: ");
-            chart2(data);
+            linechart(data, document.getElementById('chart-cosmodrome'));
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -498,7 +654,7 @@ function getCommonSattelites(){
 function getSattellites(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -513,12 +669,12 @@ function getSattellites(){
 function getCompanyLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/companies/launches/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
             console.log("SUCCESS: ");
-            chart5(data);
+            linechart(data, document.getElementById('chart-launches'));
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -528,12 +684,12 @@ function getCompanyLoad(){
 function getRacketLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/",
+        url : "http://localhost:8080/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
             console.log("SUCCESS: ");
-            chart5(data);
+            chart4(data);
         },
         error : function(e) {
             console.log("ERROR: ", e);

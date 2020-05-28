@@ -1,5 +1,10 @@
 window.onload = function () {
     getLauncheDate();
+    getRacketLoad();
+    getPHLoad();
+    getPeopleByRockets();
+    getSattellites();
+    getLoad();
 }
 
 function chart1(data) {

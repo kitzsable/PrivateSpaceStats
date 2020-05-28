@@ -569,7 +569,7 @@ function DateCalc(data) {
 function getPHLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/rockets/payload/",
+        url : "http://localhost:8080/privateSpaceStats/stats/rockets/payload/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -584,7 +584,7 @@ function getPHLoad(){
 function getCommonGoodLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/companies/payload/",
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/payload/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -599,7 +599,7 @@ function getCommonGoodLoad(){
 function getLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/spaceports/all/",
+        url : "http://localhost:8080/privateSpaceStats/stats/spaceports/all/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -644,7 +644,7 @@ function getPeopleByCompany(){
 function getCommonSattelites(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/companies/satellites/",
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -659,7 +659,7 @@ function getCommonSattelites(){
 function getSattellites(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/rockets/satellites/",
+        url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -674,7 +674,7 @@ function getSattellites(){
 function getCompanyLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/companies/launches/",
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/launches/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -689,7 +689,7 @@ function getCompanyLoad(){
 function getRacketLoad(){
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/rockets/satellites/",
+        url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             alert("data has been received");

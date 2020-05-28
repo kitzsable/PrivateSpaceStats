@@ -537,6 +537,7 @@ function getLauncheDate(){
         },
         error : function(e) {
             console.log("ERROR: ", e);
+
         },
     });
 }
@@ -570,6 +571,7 @@ function getPHLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/payload/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -585,6 +587,7 @@ function getCommonGoodLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -600,6 +603,7 @@ function getLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/spaceports/all/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -615,6 +619,7 @@ function getPeopleByRockets(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/people/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -630,6 +635,7 @@ function getPeopleByCompany(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -645,6 +651,7 @@ function getCommonSattelites(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/satellites/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -660,6 +667,7 @@ function getSattellites(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -675,6 +683,7 @@ function getCompanyLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/launches/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");
@@ -690,6 +699,7 @@ function getRacketLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
+        headers: {  'Access-Control-Allow-Origin': 'http://The web site allowed to access' },
         dataType: 'json',
         success : function(data) {
             alert("data has been received");

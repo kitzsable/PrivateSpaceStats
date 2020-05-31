@@ -1,5 +1,6 @@
-window.onload = function () {
+function start() {
     getLauncheDate();
+    getSpaceports();
     getRacketLoad();
     getPHLoad();
     getPeopleByRockets();
@@ -7,7 +8,94 @@ window.onload = function () {
     getLoad();
 }
 
+
+function chart(data, element, title){
+
+    let dat = [];
+    let years =[];
+
+    for (let i=0; i<data.length;i++){
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+        }
+    }
+
+    years.sort();
+
+    for (let j=0; j<data.length;j++){
+        let val = [];
+        for (let k=0; k<data[j].yearlyValues.length; k++){
+            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
+            else val.push(0);
+
+        }
+
+        dat.push({name: data[j].name, data: val});
+    }
+
+    let options = {
+        series: dat,
+        chart: {
+            type: 'bar',
+            height: 350,
+            background: "#4f4c4c",
+            foreColor: '#e8e8e8'
+        },
+        title: {
+            text: title,
+            align: 'center',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Segoe UI',
+                color:  '#e8e8e8'
+            },
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: years,
+        },
+        yaxis: {
+            title: {
+                text: ''
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return ""+ val + " спутников"
+                }
+            }
+        }
+    };
+
+    let chart = new ApexCharts(element, options);
+    chart.render();
+}
+
 function chart1(data) {
+
     let dat = [];
     let titles =[];
     for (let i=0; i<data.length;i++){
@@ -76,343 +164,8 @@ function chart1(data) {
     chart.render();
 
 }
-function chart2() {
-    let dat = [];
-    let years =[];
 
-    for (let i=0; i<data.length;i++){
-        for (let j=0; j<data[i].yearlyValues.length; j++){
-            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
-        }
-    }
-
-    years.sort();
-
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
-
-        }
-
-        dat.push({name: data[j].name, data: val});
-    }
-
-  let options = {
-    series: dat,
-    chart: {
-        type: 'bar',
-        height: 350,
-        background: "#4f4c4c",
-        foreColor: '#e8e8e8'
-    },
-    title: {
-        text: 'Количество спутников',
-        align: 'center',
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Segoe UI',
-            color:  '#e8e8e8'
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        categories: years,
-    },
-    yaxis: {
-        title: {
-            text: ''
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " спутников"
-            }
-        }
-    }
- };
-
- let chart = new ApexCharts(document.getElementById("chart-cosmodrome"), options);
- chart.render();
-}
-function chart3(data) {
-    let years = [];
-    let dat = [];
-
-    for (let i=0; i<data.length;i++){
-        for (let j=0; j<data[i].yearlyValues.length; j++){
-            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
-        }
-    }
-
-    years.sort();
-
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
-
-        }
-
-        dat.push({name: data[j].name, data: val});
-    }
-
-
-
- let options = {
-    series: dat,
-    chart: {
-        type: 'bar',
-        height: 350,
-        background: "#4f4c4c",
-        foreColor: '#e8e8e8'
-    },
-    title: {
-        text: 'Сколько людей отправлено',
-        align: 'center',
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Segoe UI',
-            color:  '#e8e8e8'
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        categories: years,
-    },
-    yaxis: {
-        title: {
-            text: ''
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " amount of people"
-            }
-        }
-    }
- };
-
- let chart = new ApexCharts(document.getElementById("chart-people"), options);
- chart.render();
-}
-function chart4() {
-    let dat = [];
-    let years = [];
-    for (let i=0; i<data.length;i++){
-        for (let j=0; j<data[i].yearlyValues.length; j++){
-            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
-        }
-    }
-
-    years.sort();
-
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
-
-        }
-
-        dat.push({name: data[j].name, data: val});
-    }
-
- let options = {
-    series: dat,
-    chart: {
-        type: 'bar',
-        height: 350,
-        background: "#4f4c4c",
-        foreColor: '#e8e8e8'
-    },
-    title: {
-        text: 'Запуски',
-        align: 'center',
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Segoe UI',
-            color:  '#e8e8e8'
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        categories: years,
-    },
-    yaxis: {
-        title: {
-            text: ''
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " satellites"
-            }
-        }
-    }
- };
-
- let chart = new ApexCharts(document.getElementById("chart-satel"), options);
- chart.render();
-}
-
-function chart5(data) {
-    let years = [];
-    let dat = [];
-
-    for (let i=0; i<data.length;i++){
-        for (let j=0; j<data[i].yearlyValues.length; j++){
-            if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
-        }
-    }
-
-    years.sort();
-
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
-
-        }
-
-        dat.push({name: data[j].name, data: val});
-    }
-
-
- let options = {
-    series: dat,
-    chart: {
-        type: 'bar',
-        height: 350,
-        background: "#4f4c4c",
-        foreColor: '#e8e8e8'
-    },
-    title: {
-        text: 'Сколько',
-        align: 'center',
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Segoe UI',
-            color:  '#e8e8e8'
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        categories: years,
-    },
-    yaxis: {
-        title: {
-            text: ''
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " launches"
-            }
-        }
-    }
- };
-
- let chart = new ApexCharts(document.getElementById("chart-launches"), options);
- chart.render();
-}
-
-function linechart(data, element) {
+function linechart(data, element, title) {
     let dat = [];
     let years = [];
     for (let i=0; i<data.length;i++){
@@ -439,6 +192,8 @@ function linechart(data, element) {
         chart: {
             height: 350,
             type: 'line',
+            background: "#4f4c4c",
+            foreColor: '#e8e8e8',
             zoom: {
                 enabled: false
             }
@@ -450,12 +205,12 @@ function linechart(data, element) {
             curve: 'straight'
         },
         title: {
-            text: 'Product Trends by Month',
+            text: title,
             align: 'left'
         },
         grid: {
             row: {
-                colors: ['#f3f3f3', 'transparent'],
+                colors: ['transparent'],
                 opacity: 0.5
             },
         },
@@ -540,39 +295,39 @@ function getLauncheDate(){
     });
 }
 function DateCalc(data) {
+    let date = new Date(data).getTime();
 
-    let now = new Date();
-    let newStamp = now.getTime();
+    let x = setInterval(function(){
+        let now = new Date();
+        let distance = date - now;
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-    let timer;
-    function updateClock() {
-        newDate = new Date();
-        newStamp = newDate.getTime();
-        var diff = Math.round((newStamp-startStamp)/1000);
+        document.getElementById('days').innerText=""+days;
+        document.getElementById('hours').innerText=""+hours;
+        document.getElementById('minutes').innerText=""+minutes;
 
-        var d = Math.floor(diff/(24*60*60));
-        diff = diff-(d*24*60*60);
-        var h = Math.floor(diff/(60*60));
-        diff = diff-(h*60*60);
-        var m = Math.floor(diff/(60));
-        diff = diff-(m*60);
-        var s = diff;
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById('days').innerText="0";
+            document.getElementById('hours').innerText="0";
+            document.getElementById('minutes').innerText="0";
+        }
+    }, 1000);
 
-        document.getElementById('days').innerText=d;
-        document.getElementById('hours').innerText=h;
-        document.getElementById('minutes').innerText=m;
-    }
-    timer = setInterval(updateClock, 1000);
 }
 
 function getPHLoad(){
+    let Node = document.getElementById("chart-satel");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/payload/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart4(data);
+            chart(data, Node, "Нагрузка по РН");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -580,13 +335,15 @@ function getPHLoad(){
     });
 }
 function getCommonGoodLoad(){
+    let Node = document.getElementById("chart-satel");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, document.getElementById('chart-satel'));
+            linechart(data, Node, "Общая полезная нагрузка");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -608,13 +365,15 @@ function getLoad(){
     });
 }
 function getPeopleByRockets(){
+    let Node = document.getElementById("chart-people");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/people/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart3(data);
+            chart(data, Node, "Отправлено людей");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -622,13 +381,15 @@ function getPeopleByRockets(){
     });
 }
 function getPeopleByCompany(){
+    let Node = document.getElementById("chart-people");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart3(data);
+            chart(data, Node, "Отправлено людей по компаниям");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -636,13 +397,15 @@ function getPeopleByCompany(){
     });
 }
 function getCommonSattelites(){
+    let Node = document.getElementById("chart-cosmodrome");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/satellites/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, document.getElementById('chart-cosmodrome'));
+            linechart(data, Node, "Общее число запущенных спутников");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -650,13 +413,15 @@ function getCommonSattelites(){
     });
 }
 function getSattellites(){
+    let Node = document.getElementById("chart-cosmodrome");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart2(data);
+            chart(data, Node, "Запущено спутников по РН");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -664,13 +429,15 @@ function getSattellites(){
     });
 }
 function getCompanyLoad(){
+    let Node = document.getElementById("chart-launches");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/launches/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, document.getElementById('chart-launches'));
+            linechart(data, Node, "Запуски компаний");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -678,13 +445,15 @@ function getCompanyLoad(){
     });
 }
 function getRacketLoad(){
+    let Node = document.getElementById("chart-launches");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart4(data);
+            chart(data, Node, "Запуски ракето-носителей");
         },
         error : function(e) {
             console.log("ERROR: ", e);

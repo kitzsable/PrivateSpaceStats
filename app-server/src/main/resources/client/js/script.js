@@ -528,7 +528,7 @@ function getLauncheDate(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/launches/nextDate",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             DateCalc(data);
@@ -569,7 +569,7 @@ function getPHLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/payload/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart4(data);
@@ -583,7 +583,7 @@ function getCommonGoodLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             linechart(data, document.getElementById('chart-satel'));
@@ -597,7 +597,7 @@ function getLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/spaceports/all/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart1(data);
@@ -611,7 +611,7 @@ function getPeopleByRockets(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/people/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart3(data);
@@ -625,7 +625,7 @@ function getPeopleByCompany(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/payload",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart3(data);
@@ -639,7 +639,7 @@ function getCommonSattelites(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/satellites/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             linechart(data, document.getElementById('chart-cosmodrome'));
@@ -653,7 +653,7 @@ function getSattellites(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart2(data);
@@ -667,7 +667,7 @@ function getCompanyLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/companies/launches/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             linechart(data, document.getElementById('chart-launches'));
@@ -681,7 +681,7 @@ function getRacketLoad(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             chart4(data);

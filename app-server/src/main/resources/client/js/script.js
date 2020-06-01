@@ -2,13 +2,12 @@ function start() {
     getLauncheDate();
     getSpaceports();
 
-    getRacketLoad();
-    getPHLoad();
-    getPeopleByCompany();
-    getSattellites();
+    getCompanyLoad();
+    getCommonGoodLoad();
+    getPeopleByRockets();
+    getCommonSattelites();
     getLoad();
 }
-
 
 function chart(data, element, title){
     
@@ -111,7 +110,7 @@ function chart(data, element, title){
     chart.render();
 }
 
-function chart1(data) {
+function chart1(data, element) {
 
     let dat = [];
     let titles =[];
@@ -201,11 +200,11 @@ function donut (data, element, title){
 
     }
 
-    var options = {
+    let options = {
         series: dat,
         labels: titles,
         chart: {
-            type: 'donut',
+            type: 'pie',
             height: 350,
             background: "#4f4c4c",
             foreColor: '#e8e8e8'
@@ -237,7 +236,7 @@ function donut (data, element, title){
         }]
     };
 
-    var chart = new ApexCharts(element, options);
+    let chart = new ApexCharts(element, options);
     chart.render();
 }
 
@@ -331,7 +330,6 @@ function map(data) {
     elem4.innerHTML = 'Название: '+ data[3].name + ' Координаты: '+ data[3].location+ ' Запуски за 2020 год: '+data[3].launchByLastYear;
     elem5.innerHTML = 'Название: '+ data[4].name + ' Координаты: '+ data[4].location+ ' Запуски за 2020 год: '+data[4].launchByLastYear;
     for (let i=0; i<data.length;i++){
-
     }
 }
 
@@ -422,13 +420,15 @@ function getCommonGoodLoad(){
     });
 }
 function getLoad(){
+    let Node = document.getElementById("chart-load");
+    Node.innerHTML = '';
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/spaceports/all/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart1(data);
+            chart1(data, Node);
         },
         error : function(e) {
             console.log("ERROR: ", e);

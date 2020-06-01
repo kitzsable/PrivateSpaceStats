@@ -1,36 +1,53 @@
 function start() {
     getLauncheDate();
     getSpaceports();
+
     getRacketLoad();
     getPHLoad();
-    getPeopleByRockets();
+    getPeopleByCompany();
     getSattellites();
     getLoad();
 }
 
 
 function chart(data, element, title){
-
+    
     let dat = [];
     let years =[];
+    let test = [];
 
     for (let i=0; i<data.length;i++){
+        let comp = []
         for (let j=0; j<data[i].yearlyValues.length; j++){
             if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+            comp.push({name: data[i].name, year: data[i].yearlyValues[j].year, data: data[i].yearlyValues[j].value});
         }
+        comp.sort(function (a, b) {
+            return a.year - b.year;
+        })
+        test.push(comp);
     }
 
     years.sort();
 
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
+    for (let i=0; i<test.length; i++){
+        let val = []; let name;
+        for (let u=0; u<years.length; u++){
+            let check=0; let temp = 0;
+
+            for (let j=0; j<test[i].length; j++){
+                name = test[i][j].name;
+                temp=j;
+                if (years[u]==test[i][j].year){
+                    check = 1;
+                    val.push(test[i][j].data);
+                    break;
+                }
+            }
+            if (check == 0) val.push(0);
 
         }
-
-        dat.push({name: data[j].name, data: val});
+        dat.push({name: name, data: val});
     }
 
     let options = {
@@ -84,7 +101,7 @@ function chart(data, element, title){
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return ""+ val + " спутников"
+                    return ""+ val
                 }
             }
         }
@@ -154,37 +171,114 @@ function chart1(data) {
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " load"
+                    return "$ " + val
                 }
             }
         }
     };
 
-    let chart = new ApexCharts(document.getElementById("chart-load"), options);
+    let chart = new ApexCharts(element, options);
     chart.render();
 
 }
 
-function linechart(data, element, title) {
+function donut (data, element, title){
     let dat = [];
-    let years = [];
+    let titles = [];
+
     for (let i=0; i<data.length;i++){
+        let amount = 0;
+        for (let j=0; j<data[i].yearlyValues.length; j++){
+            amount += data[i].yearlyValues[j].value;
+        }
+
+        dat.push(amount);
+    }
+
+    for (let i=0; i<data.length;i++){
+        if (!titles.includes(data[i].name))
+            titles.push(data[i].name);
+
+    }
+
+    var options = {
+        series: dat,
+        labels: titles,
+        chart: {
+            type: 'donut',
+            height: 350,
+            background: "#4f4c4c",
+            foreColor: '#e8e8e8'
+        },
+        title:{
+            text: title,
+            align: 'center',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Segoe UI',
+                color:  '#e8e8e8'
+            },
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(element, options);
+    chart.render();
+}
+
+function linechart(data, element, title) {
+
+    let dat = [];
+    let years =[];
+    let test = [];
+
+    for (let i=0; i<data.length;i++){
+        let comp = []
         for (let j=0; j<data[i].yearlyValues.length; j++){
             if (!years.includes(data[i].yearlyValues[j].year)) years.push(data[i].yearlyValues[j].year);
+            comp.push({name: data[i].name, year: data[i].yearlyValues[j].year, data: data[i].yearlyValues[j].value});
         }
+        comp.sort(function (a, b) {
+            return a.year - b.year;
+        })
+        test.push(comp);
     }
 
     years.sort();
 
-    for (let j=0; j<data.length;j++){
-        let val = [];
-        for (let k=0; k<data[j].yearlyValues.length; k++){
-            if (years.includes(data[j].yearlyValues[k].year)) val.push(data[j].yearlyValues[k].value);
-            else val.push(0);
+    for (let i=0; i<test.length; i++){
+        let val = []; let name;
+        for (let u=0; u<years.length; u++){
+            let check=0; let temp = 0;
+
+            for (let j=0; j<test[i].length; j++){
+                name = test[i][j].name;
+                temp=j;
+                if (years[u]==test[i][j].year){
+                    check = 1;
+                    val.push(test[i][j].data);
+                    break;
+                }
+            }
+            if (check == 0) val.push(0);
 
         }
-
-        dat.push({name: data[j].name, data: val});
+        dat.push({name: name, data: val});
     }
 
     let options = {
@@ -224,43 +318,20 @@ function linechart(data, element, title) {
 
 
 function map(data) {
-    let elem1 = document.getElementsByClassName("m1");
-    let elem2 = document.getElementsByClassName("m2");
-    let elem3 = document.getElementsByClassName("m3");
-    let elem4 = document.getElementsByClassName("m4");
+    let elem1 = document.getElementById("tooltip1");
+    let elem2 = document.getElementById("tooltip2");
+    let elem3 = document.getElementById("tooltip3");
+    let elem4 = document.getElementById("tooltip4");
+    let elem5 = document.getElementById("tooltip5");
+    let elem6 = document.getElementById("tooltip6");
+    let elem7 = document.getElementById("tooltip7");
+    elem1.innerHTML = 'Название: '+ data[0].name + ' Координаты: '+ data[0].location+ ' Запуски за 2020 год: '+data[0].launchByLastYear;
+    elem2.innerHTML = 'Название: '+ data[1].name + ' Координаты: '+ data[1].location+ ' Запуски за 2020 год: '+data[1].launchByLastYear;
+    elem3.innerHTML = 'Название: '+ data[2].name + ' Координаты: '+ data[2].location+ ' Запуски за 2020 год: '+data[2].launchByLastYear;
+    elem4.innerHTML = 'Название: '+ data[3].name + ' Координаты: '+ data[3].location+ ' Запуски за 2020 год: '+data[3].launchByLastYear;
+    elem5.innerHTML = 'Название: '+ data[4].name + ' Координаты: '+ data[4].location+ ' Запуски за 2020 год: '+data[4].launchByLastYear;
     for (let i=0; i<data.length;i++){
-        if (data[i].company == "SpaceX"){
-            for (let j=0; j<elem1.length;j++){
-                if (elem1[j].tooltip=="") {
-                    elem1[j].tooltip=data[i].name;
-                    break;
-                }
-            }
-        }
-        else if (data[i].company == "RocketLab"){
-            for (let j=0; j<elem2.length;j++){
-                if (elem2[j].tooltip=="") {
-                    elem1[j].tooltip=data[i].name;
-                    break;
-                }
-            }
-        }
-        else if (data[i].company == "One Space"){
-            for (let j=0; j<elem3.length;j++){
-                if (elem3[j].tooltip=="") {
-                    elem1[j].tooltip=data[i].name;
-                    break;
-                }
-            }
-        }
-        else if (data[i].company == "Interstellar"){
-            for (let j=0; j<elem4.length;j++){
-                if (elem4[j].tooltip=="") {
-                    elem1[j].tooltip=data[i].name;
-                    break;
-                }
-            }
-        }
+
     }
 }
 
@@ -327,7 +398,7 @@ function getPHLoad(){
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart(data, Node, "Нагрузка по РН");
+            chart(data, Node, "Масса полезной нагрузки выведенной на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -343,7 +414,7 @@ function getCommonGoodLoad(){
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, Node, "Общая полезная нагрузка");
+            linechart(data, Node, "Масса полезной нагрузки выведенной на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -369,11 +440,11 @@ function getPeopleByRockets(){
     Node.innerHTML = '';
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/privateSpaceStats/stats/rockets/people/",
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/people/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart(data, Node, "Отправлено людей");
+            donut(data, Node, "Количество людей доставленных на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -385,11 +456,11 @@ function getPeopleByCompany(){
     Node.innerHTML = '';
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/privateSpaceStats/stats/companies/payload",
+        url : "http://localhost:8080/privateSpaceStats/stats/companies/people",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart(data, Node, "Отправлено людей по компаниям");
+            chart(data, Node, "Количество людей доставленных на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -405,7 +476,7 @@ function getCommonSattelites(){
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, Node, "Общее число запущенных спутников");
+            linechart(data, Node, "Количество спутников выведенных на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -421,7 +492,7 @@ function getSattellites(){
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart(data, Node, "Запущено спутников по РН");
+            chart(data, Node, "Количество спутников выведенных на орбиту");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -437,7 +508,7 @@ function getCompanyLoad(){
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            linechart(data, Node, "Запуски компаний");
+            linechart(data, Node, "Общее количество удачных запусков");
         },
         error : function(e) {
             console.log("ERROR: ", e);
@@ -449,11 +520,11 @@ function getRacketLoad(){
     Node.innerHTML = '';
     $.ajax({
         type: 'GET',
-        url : "http://localhost:8080/privateSpaceStats/stats/rockets/satellites/",
+        url : "http://localhost:8080/privateSpaceStats/stats/rockets/launches/",
         dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
-            chart(data, Node, "Запуски ракето-носителей");
+            chart(data, Node, "Общее количество удачных запусков");
         },
         error : function(e) {
             console.log("ERROR: ", e);

@@ -18,7 +18,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="#" >Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">SpaceX</a>
@@ -45,26 +45,18 @@
         <p>Расписание</p>
     </div>
     <div class="section block">
-        <div class="section block container">
-            <div class="section block container hold">
-                <h1 id="companyname">Имя компании</h1>
-            </div>
 
+        <div class="section block cont back">
+            <h2 class="number-value" id="days">N</h2>
+            <h3 class="time-value">дней</h3>
         </div>
-
-        <div class="section block cont">
-            <div class="section block cont back">
-                <h2 class="number-value" id="days">N</h2>
-                <h3 class="time-value">days</h3>
-            </div>
-            <div class="section block cont back">
-                <h2 class="number-value" id="hours">N</h2>
-                <h3 class="time-value">hours</h3>
-            </div>
-            <div class="section block cont back">
-                <h2 class="number-value" id="minutes">N</h2>
-                <h3 class="time-value">minutes</h3>
-            </div>
+        <div class="section block cont back">
+            <h2 class="number-value" id="hours">N</h2>
+            <h3 class="time-value">часов</h3>
+        </div>
+        <div class="section block cont back">
+            <h2 class="number-value" id="minutes">N</h2>
+            <h3 class="time-value">минут</h3>
         </div>
 
     </div>
@@ -72,32 +64,32 @@
 
 <div class="section">
     <div class="section line">
-        <p onmousedown="getCompanyLoad();">Запуски компаний</p>
-        <p onmousedown="getRacketLoad();">Запуски ракето-носителей</p>
+        <p onmousedown="getCompanyLoad();">По компаниям</p>
+        <p onmousedown="getRacketLoad();">По ракетам-носителям</p>
     </div>
     <div id="chart-launches"></div>
 </div>
 
 <div class="section">
     <div class="section line">
-        <p onmousedown="getCommonGoodLoad();">Общая полезная нагрузка</p>
-        <p onmousedown="getPHLoad();">Нагрузка по РН</p>
+        <p onmousedown="getCommonGoodLoad();">По компаниям</p>
+        <p onmousedown="getPHLoad();">По ракетам-носителям</p>
     </div>
     <div id="chart-satel"></div>
 </div>
 
 <div class="section">
     <div class="section line">
-        <p onmousedown="getPeopleByRockets();">По ракетам</p>
-        <p onmousedown="getPeopleByCompany();">По компаниям</p>
+        <p onmousedown="getPeopleByRockets();">По годам</p>
+        <p onmousedown="getPeopleByCompany();">За всё время</p>
     </div>
     <div id="chart-people"></div>
 </div>
 
 <div class="section">
     <div class="section line">
-        <p onmousedown="getCommonSattelites();">Общее число запущенных спутников</p>
-        <p onmousedown="getSattellites();">Спутники по РН</p>
+        <p onmousedown="getCommonSattelites();">По компаниям</p>
+        <p onmousedown="getSattellites();">По ракетам-носителям</p>
     </div>
     <div id="chart-cosmodrome"></div>
 </div>
@@ -111,17 +103,27 @@
 
 <div class="map-div">
     <img src="../media/WorldMap.png" />
-    <span tooltip="" flow="down" class="metka m1">!</span>
-    <span tooltip="" flow="down" class="metka m1" style="left: 74%; bottom: 38%"></span>
-    <span tooltip="" flow="down" class="metka m1" style="left: 86%; bottom: 43%"></span>
 
-    <span tooltip="" flow="down" class="metka m3" style="right: 3%; bottom: 23%"></span>
-    <span tooltip="" flow="down" class="metka m4" style="right: 34%; top: 46%"></span>
+    <div style="margin-left:20px; left: 13%; top: 40%; text-decoration-color: #b92c28" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip1"></span></div>
 
-    <span tooltip="" flow="down" class="metka m2" style="right: 29%; bottom: 54%"></span>
+    <div style="margin-left:20px; left: 19%; top: 45%; text-decoration-color: #b92c28" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip2"></span></div>
 
-    <span tooltip="" flow="down" class="metka m2" style="right: 13%; bottom: 49%"></span>
-    <span ></span>
+    <div style="margin-left:20px; left: 24%; top: 45%; text-decoration-color: #b92c28" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip3"></span></div>
+
+    <div style="margin-left:20px; right: 21%; top: 34%; text-decoration-color: #4cae4c" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip4"></span></div>
+
+    <div style="margin-left:20px; right: 13%; top: 33%; text-decoration-color: #d9534f" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip5"></span></div>
+
+    <div style="margin-left:20px; right: 6%; bottom: 36%; text-decoration-color: crimson" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip6"></span></div>
+
+    <div style="margin-left:20px; right: 0%; bottom: 16%; text-decoration-color: #d9534f" class="tooltip-ex"><strong>.</strong>
+        <span class="tooltip-ex-text tooltip-ex-bottom" id="tooltip7"></span></div>
 </div>
 
 <div class="info-block">

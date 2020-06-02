@@ -38,6 +38,7 @@ body{
     margin: 0 auto;
 }
 .section.line p{
+    cursor: default;
     color: #e8e8e8;
     font-family: Segoe UI;
     border-right:2px solid #cc6666;

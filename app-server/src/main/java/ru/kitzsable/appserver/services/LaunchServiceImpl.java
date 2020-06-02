@@ -162,6 +162,7 @@ public class LaunchServiceImpl implements LaunchService{
                         new YearlyCharacteristicValuesDTO(carrierRocket.getName(),
                                 launchRepository.findAllByCarrierRocket(carrierRocket)
                                         .stream()
+                                        .filter(Launch::getSuccess)
                                         .collect(Collectors.groupingBy(launch ->
                                                         launch.getDate().getYear(),
                                                 collector))))

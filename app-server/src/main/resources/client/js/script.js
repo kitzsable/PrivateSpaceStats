@@ -337,7 +337,7 @@ function getSpaceports(){
     $.ajax({
         type: 'GET',
         url : "http://localhost:8080/privateSpaceStats/stats/spaceports/all/",
-        dataType: 'application/json',
+        dataType: 'json',
         success : function(data) {
             console.log("SUCCESS: ");
             map(data);

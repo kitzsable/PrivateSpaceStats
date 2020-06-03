@@ -150,6 +150,11 @@ body{
     left: 50%;
     margin-left: -60px;
 }
+.tooltip-ex-left {
+    top: -5px;
+    right: 105%;
+    margin-left: -60px;
+}
 
 .tooltip-ex-text {
     visibility: hidden;

@@ -322,11 +322,11 @@ function map(data) {
     let elem3 = document.getElementById("tooltip3");
     let elem5 = document.getElementById("tooltip5");
     let elem7 = document.getElementById("tooltip7");
-    elem1.innerHTML = 'Название: '+ data[3].name + '\nКоординаты: '+ data[3].location+ '\nЗапуски за 2020 год: '+data[3].launchByLastYear;
-    elem2.innerHTML = 'Название: '+ data[2].name + '\nКоординаты: '+ data[2].location+ '\nЗапуски за 2020 год: '+data[2].launchByLastYear;
-    elem3.innerHTML = 'Название: '+ data[4].name + '\nКоординаты: '+ data[4].location+ '\nЗапуски за 2020 год: '+data[4].launchByLastYear;
-    elem5.innerHTML = 'Название: '+ data[1].name + '\nКоординаты: '+ data[1].location+ '\nЗапуски за 2020 год: '+data[1].launchByLastYear;
-    elem7.innerHTML = 'Название: '+ data[0].name + '\nКоординаты: '+ data[0].location+ '\nЗапуски за 2020 год: '+data[0].launchByLastYear;
+    elem1.innerHTML = 'Название: '+ data[3].name + "<br>"+ 'Координаты: '+ data[3].location+"<br>"+ 'Запуски за 2020 год: '+data[3].launchByLastYear;
+    elem2.innerHTML = 'Название: '+ data[2].name + "<br>"+'Координаты: '+ data[2].location+"<br>"+ 'Запуски за 2020 год: '+data[2].launchByLastYear;
+    elem3.innerHTML = 'Название: '+ data[4].name + "<br>"+'Координаты: '+ data[4].location+ "<br>"+'Запуски за 2020 год: '+data[4].launchByLastYear;
+    elem5.innerHTML = 'Название: '+ data[1].name + "<br>"+'Координаты: '+ data[1].location+ "<br>"+'Запуски за 2020 год: '+data[1].launchByLastYear;
+    elem7.innerHTML = 'Название: '+ data[0].name + "<br>"+'Координаты: '+ data[0].location+ "<br>"+'Запуски за 2020 год: '+data[0].launchByLastYear;
     for (let i=0; i<data.length;i++){
     }
 }
